@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}To know Weather!{% endblock %}
+
+    {% block body %}
+
+
+        <div style="margin-top:-20rem" class="overlay">
+            <h1 class="fontHome">To know Whether </h1>
+        </div>
+
+        <div class="example-wrapper">
+
+            <form method="post" action="/weather">
+
+                <div class="wrap">
+                    <div class="search">
+                        <input class="searchTerm" type="text" name="City" placeholder="Enter name of city">
+                        <input class="searchButton" formaction="/weather" type="submit" name="Submit" value="For today">
+                        <input class="searchButton" formaction="/weather1" type="submit" name="Submit1"
+                               value="For 5 Days">
+                        <i class="fa fa-search"></i>
+                        </input>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    {% endblock %}

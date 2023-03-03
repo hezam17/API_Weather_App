@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}To know Weather in {{ location.name }}{% endblock %}
+
+    {% block body %}
+        {% set x= 0 %}
+        <div class="container">
+            <div class="weather-side">
+                <div class="weather-gradient"></div>
+                <div class="date-container">
+                    <h2 class="date-dayname"> {{ days[x].date |date("l") }} {{ location.localtime |date("h:i") }} </h2>
+                    <i class="location-icon" data-feather="map-pin"></i>
+                    <span style="font-size: 20px"
+                          class="location">{{ location.name }} {{ location.region }} {{ location.country }}</span>
+                    <div class="humidity"><span class="title">HUMIDITY</span>
+                        <span class="value">&nbsp&nbsp {{ current.humidity }} %</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wind "><span class="title">WIND</span><span
+                                class="value">&nbsp&nbsp {{ current.wind_kph }}km/h</span>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="weather-container" class="weather-container"><i class="weather-icon"></i>
+                    <img src="{{ current.condition.icon }}">
+                    <h1 class="weather-temp">{{ current.temp_c }}&degc</h1>
+                    <h3 class="weather-desc">{{ current.condition.text }}</h3>
+
+                    <div class="Hours-container">
+                        <table>
+                            <div class="space">
+                                <tr>
+                                    {% for day in days %}
+                                        <td>{{ days[0].hour[x].time_epoch |date("H:i") }}</td>
+                                        {% set x=x+5 %}
+                                    {% endfor %}
+                                </tr>
+                            </div>
+                            <tr>
+                                {% set x= 1 %}
+                                {% for day in days %}
+                                    <td>  {{ days[0].hour[x].temp_c |round }}&degc</td>
+                                    {% set x=x+5 %}
+                                {% endfor %}
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form method="Post" action="/">
+            <div class="location-container">
+                <button class="location-button"><i data-feather="map-pin"></i><span>Change location</span></button>
+            </div>
+        </form>
+        </div>
+
+    {% endblock %}

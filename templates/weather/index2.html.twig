@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}To know Weather in {{ location.name }}{% endblock %}
+
+{% block body %}
+    {% set x= 0 %}
+    <div class="container">
+    <div class="info-side">
+        <div class="today-info-container">
+
+
+            <div class="today-info">
+                <div>
+
+                        <span style="font-size: 20px"
+                              class="location">{{ location.name }} {{ location.region }} {{ location.country }}</span>
+                </div>
+
+                <div class="SUNRISE"><span class="title"> SUNRISE  </span><span
+                            class="value">{{ days[0].astro.sunrise }}</span>
+                    <div class="clear"></div>
+                    <div class="SUNRISE"><span class="title"> SUNSET  </span><span
+                                class="value">{{ days[0].astro.sunset }}</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="humidity"><span class="title">HUMIDITY  </span>
+                        <span class="value">{{ current.humidity }} %</span>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="wind  "><span class="title">WIND  {{ current.wind_kph }}km/h</span>
+
+                        <span class="value">{{ current.wind_kph }}km/h</span>
+                        <div class="clear"></div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="week-container">
+
+                <ul class="week-list">
+                    {% set x= 0 %}
+                    {% for day in days %}
+                        <li><i class="day-icon" data-feather="cloud"></i>
+
+                            <span class="day-icon">
+                                <img src="{{ days[x].day.condition.icon }}"></span>
+                            <br>
+                            <span
+                                    class="day-name">{{ days[x].date |date("l") }}</span>
+                            <span
+                                    class="day-temp">{{ days[x].day.maxtemp_c |round }}&degc</span>
+                            <span
+                                    class="day-temp">{{ days[x].day.mintemp_c |round }}&degc</span>
+                        </li>
+                        {% set x=x+1 %}
+                    {% endfor %}
+                </ul>
+            </div>
+            <form method="Post" action="/">
+
+                <div class="location-container">
+                    <button class="location-button"><i data-feather="map-pin"></i><span>Change location</span></button>
+
+                </div>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}
